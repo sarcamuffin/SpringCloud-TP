@@ -1,0 +1,10 @@
+POST http://localhost:8088/etudiants
+Content-Type: application/json
+
+{
+  "firstName": "omar",
+  "lastName": "drh"
+}
+
+
+

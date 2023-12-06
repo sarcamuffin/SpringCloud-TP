@@ -40,14 +40,13 @@ public class InscriptionController {
     public ResponseEntity<String> addInscription2(@PathVariable("idEleve") Long idEleve,
                                                   @PathVariable("idCours") Long idCours){
         try {
-            inscriptionService.assignElevetoCours(idEleve,idCours);
+            inscriptionService2.assignElevetoCours2(idEleve, idCours);
             return ResponseEntity.ok("Inscription ajoutée avec succès");
-        } catch (Exception e) {
-
-            // Retournez une réponse d'erreur
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erreur interne du serveur");
-        }
+        }catch (Exception e) {
+                e.printStackTrace(); // Log the exception
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Erreur interne du serveur");
+            }
     }
     @GetMapping("/inscriptions")
     public ResponseEntity<?> getAllInscriptions(){

@@ -1,0 +1,6 @@
+POST http://localhost:8089/cours
+Content-Type: application/json
+
+{
+  "nomCours" : "Microservices"
+}
