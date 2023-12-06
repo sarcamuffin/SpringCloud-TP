@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  mysql-db1:
+    image: mysql
+    container_name: mysql-container-1
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password-1
+      MYSQL_DATABASE: database1
+    ports:
+      - "3306:3306"
+
+  mysql-db2:
+    image: mysql
+    container_name: mysql-container-2
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password-2
+      MYSQL_DATABASE: database2
+    ports:
+      - "3307:3306"
+
+  mysql-db3:
+    image: mysql
+    container_name: mysql-container-3
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password-3
+      MYSQL_DATABASE: database3
+    ports:
+      - "3308:3306"
