@@ -3,10 +3,12 @@ package com.example.serviceinscription.service;
 import com.example.serviceinscription.entity.Inscription;
 import com.example.serviceinscription.repository.InscriptionRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import static com.example.serviceinscription.service.InscriptionService2.stringToInscription;
+
 
 @Service
 public class InscriptionService {

@@ -6,41 +6,30 @@ import com.example.serviceinscription.entity.Inscription;
 import com.example.serviceinscription.repository.InscriptionRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
-
+@EnableFeignClients
 @Service
-public class InscriptionService2 {
+public class InscriptionService3 {
 
-    private final WebClient webClient1;
-    private final WebClient webClient2;
-
-
+    private final FeignApiClient feignApiClient;
     private final InscriptionRepository inscriptionRepository;
 
-
-    public InscriptionService2(InscriptionRepository inscriptionRepository) {
-
+    @Autowired
+    public InscriptionService3(FeignApiClient feignApiClient, InscriptionRepository inscriptionRepository) {
+        this.feignApiClient = feignApiClient;
         this.inscriptionRepository = inscriptionRepository;
-        this.webClient1 = WebClient.create("http://localhost:8088");
-        this.webClient2 = WebClient.create("http://localhost:8089");
     }
 
-    public Inscription assignElevetoCours2(Long idEleve, Long idCours) throws JsonProcessingException {
+    public Inscription assignElevetoCours3(Long idEleve, Long idCours) throws JsonProcessingException {
 
-        String responseEleve = webClient1.get()
-                .uri("/etudiants/" + idEleve.toString())
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        // Use FeignApiClient to get information about the student
+        String responseEleve = String.valueOf(feignApiClient.getEtudiantById(idEleve));
 
-        String responseCours = webClient2.get()
-                .uri("/cours/" + idCours.toString())
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        // Use FeignApiClient to get information about the course
+        String responseCours = String.valueOf(feignApiClient.getCoursById(idCours));
 
         return stringToInscription(responseEleve, responseCours, inscriptionRepository);
     }
